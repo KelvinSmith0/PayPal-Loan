@@ -14,14 +14,16 @@ nav{background:white;padding:20px 0;border-bottom:1px solid #e5e7eb;}
 .nav-content{display:flex;justify-content:space-between;align-items:center;}
 .logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:bold;}
 .logo svg{width:40px;height:40px;}
-.btn{background:#0057d8;color:white;padding:14px 24px;border:none;border-radius:30px;cursor:pointer;font-weight:bold;}
+.btn{background:#0057d8;color:white;padding:14px 24px;border:none;border-radius:30px;cursor:pointer;font-weight:bold;transition:opacity .2s, transform .2s;}
+.btn:hover{opacity:.9;transform:translateY(-1px);}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
 
 .hero{padding:80px 0;}
 .badge{display:inline-block;background:white;padding:10px 18px;border-radius:30px;border:1px solid #ddd;margin-bottom:20px;}
 .hero h1{font-size:60px;line-height:1.1;margin-bottom:20px;}
 .hero h1 span{color:#0057d8;}
 .hero p{font-size:20px;color:#555;max-width:700px;}
-.hero-buttons{margin-top:30px;display:flex;gap:20px;}
+.hero-buttons{margin-top:30px;display:flex;gap:20px;flex-wrap:wrap;}
 .secondary-btn{border:none;background:none;font-weight:bold;cursor:pointer;}
 .features{display:flex;gap:40px;margin-top:40px;color:#666;flex-wrap:wrap;}
 
@@ -33,7 +35,7 @@ nav{background:white;padding:20px 0;border-bottom:1px solid #e5e7eb;}
 .stat{background:#f1f5f9;padding:25px;border-radius:20px;text-align:center;}
 .stat h3{font-size:32px;}
 .benefits{margin-top:30px;}
-.benefits li{margin:10px 0;}
+.benefits li{margin:10px 0;list-style:none;}
 
 .brands{background:white;padding:25px 0;margin-top:40px;}
 .brand-list{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;color:#666;font-weight:bold;}
@@ -44,6 +46,7 @@ nav{background:white;padding:20px 0;border-bottom:1px solid #e5e7eb;}
 
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 .card{background:white;padding:30px;border-radius:25px;}
+.card h4{color:#0057d8;}
 .card h3{margin:15px 0;}
 
 .eligibility-list{display:flex;flex-direction:column;gap:20px;}
@@ -53,18 +56,51 @@ nav{background:white;padding:20px 0;border-bottom:1px solid #e5e7eb;}
 .faq-question{padding:20px;font-weight:bold;cursor:pointer;display:flex;justify-content:space-between;}
 .faq-answer{padding:20px;display:none;border-top:1px solid #eee;}
 
-.application{background:white;padding:40px;border-radius:30px;margin-top:50px;}
+.application{background:white;padding:40px;border-radius:30px;margin-top:50px;scroll-margin-top:20px;}
 .application-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
 .application label{display:block;margin-bottom:8px;font-weight:600;}
 .form-group{margin-bottom:10px;}
-input,select,textarea{width:100%;padding:15px;border:1px solid #ccc;border-radius:10px;}
+input,select,textarea{width:100%;padding:15px;border:1px solid #ccc;border-radius:10px;font-family:inherit;font-size:15px;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#0057d8;box-shadow:0 0 0 3px rgba(0,87,216,.1);}
 textarea{min-height:120px;resize:vertical;}
 .full-width{grid-column:1/-1;}
-.submit-row{display:flex;justify-content:space-between;align-items:center;gap:20px;}
+.submit-row{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
 .agreement{color:#666;font-size:14px;max-width:700px;}
 
+/* ===== NEW: Success message styles ===== */
+.success-message{
+  display:none;
+  text-align:center;
+  padding:60px 30px;
+  animation:fadeIn .5s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
+.success-icon{
+  width:90px;height:90px;
+  background:#10b981;
+  border-radius:50%;
+  margin:0 auto 25px;
+  display:flex;align-items:center;justify-content:center;
+  animation:pop .4s ease;
+}
+@keyframes pop{0%{transform:scale(0);}80%{transform:scale(1.1);}100%{transform:scale(1);}}
+.success-icon svg{width:48px;height:48px;stroke:white;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.success-message h2{color:#10b981;font-size:36px;margin-bottom:15px;}
+.success-message p{color:#555;font-size:18px;max-width:600px;margin:10px auto;line-height:1.5;}
+.btn-secondary{
+  background:white;color:#0057d8;
+  border:2px solid #0057d8;
+  padding:12px 30px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold;
+  margin-top:30px;
+  font-size:15px;
+}
+.btn-secondary:hover{background:#0057d8;color:white;}
+
 .footer{background:white;padding:50px 0;margin-top:60px;border-top:1px solid #e5e7eb;}
-.footer-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;}
+.footer-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;flex-wrap:wrap;gap:20px;}
 .footer-links{display:flex;gap:30px;}
 .footer-links a{text-decoration:none;color:#666;}
 .footer-text{color:#777;font-size:14px;line-height:1.8;}
@@ -76,9 +112,11 @@ textarea{min-height:120px;resize:vertical;}
 .brand-list{justify-content:center;}
 .section-title{font-size:34px;}
 .submit-row,.footer-top{flex-direction:column;align-items:flex-start;}
+.success-message h2{font-size:28px;}
 }
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -92,7 +130,7 @@ textarea{min-height:120px;resize:vertical;}
 </svg>
 PayPal Loan
 </div>
-<button class="btn">Check my offer →</button>
+<button class="btn check-offer-btn" type="button">Check my offer →</button>
 </div>
 </nav>
 
@@ -101,7 +139,7 @@ PayPal Loan
 <h1>Working capital,<br><span>tied to your PayPal sales.</span></h1>
 <p>Get a transparent offer in 2 minutes based on your real PayPal revenue. No paperwork, hidden fees or impact on your credit score.</p>
 <div class="hero-buttons">
-<button class="btn">Check my offer</button>
+<button class="btn check-offer-btn" type="button">Check my offer</button>
 <button class="secondary-btn">See how it works →</button>
 </div>
 <div class="features">
@@ -171,29 +209,61 @@ PayPal Loan
 <div class="faq-item"><div class="faq-question">Is this affiliated with PayPal?<span>+</span></div><div class="faq-answer">This platform is independent and is not affiliated with PayPal.</div></div>
 </section>
 
-<section class="container">
+<section class="container" id="apply">
 <div class="application">
 <p class="section-subtitle" style="text-align:center;">Apply now</p>
 <h2 class="section-title" style="text-align:center;">Submit your application</h2>
 <p style="text-align:center;color:#666;margin-bottom:40px;">Fill out the form below. We'll review your PayPal sales and email you a personalized offer within 1 business day.</p>
 
-<form class="application-grid">
-<div class="form-group"><label>Full Name *</label><input type="text"></div>
-<div class="form-group"><label>Email *</label><input type="email"></div>
-<div class="form-group"><label>Phone</label><input type="text"></div>
-<div class="form-group"><label>Business Name</label><input type="text"></div>
-<div class="form-group"><label>PayPal Email *</label><input type="email"></div>
-<div class="form-group"><label>Country</label><input type="text"></div>
-<div class="form-group"><label>Avg Monthly PayPal Revenue (USD)</label><input type="number"></div>
-<div class="form-group"><label>Amount Requested (USD)</label><input type="number"></div>
-<div class="form-group"><label>Months Active on PayPal</label><input type="number"></div>
-<div class="form-group"><label>Loan Purpose</label><select><option>Select One</option></select></div>
-<div class="form-group full-width"><label>Anything Else?</label><textarea></textarea></div>
+<form class="application-grid" id="application-form" autocomplete="on">
+<!-- Honeypot for spam bots - keep hidden -->
+<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+<div class="form-group"><label>Full Name *</label><input type="text" name="full_name" required></div>
+<div class="form-group"><label>Email *</label><input type="email" name="email" required></div>
+<div class="form-group"><label>Phone</label><input type="tel" name="phone"></div>
+<div class="form-group"><label>Business Name</label><input type="text" name="business_name"></div>
+<div class="form-group"><label>PayPal Email *</label><input type="email" name="paypal_email" required></div>
+<div class="form-group"><label>Country</label>
+<select name="country">
+<option value="">Select country</option>
+<option>United States</option><option>United Kingdom</option><option>Canada</option>
+<option>Germany</option><option>France</option><option>Spain</option>
+<option>Italy</option><option>Netherlands</option><option>Other EU</option>
+</select>
+</div>
+<div class="form-group"><label>Avg Monthly PayPal Revenue (USD)</label><input type="number" name="monthly_revenue" min="0"></div>
+<div class="form-group"><label>Amount Requested (USD)</label><input type="number" name="amount_requested" min="0"></div>
+<div class="form-group"><label>Months Active on PayPal</label><input type="number" name="months_active" min="0"></div>
+<div class="form-group"><label>Loan Purpose</label>
+<select name="loan_purpose">
+<option value="">Select one</option>
+<option>Inventory</option>
+<option>Marketing / Ads</option>
+<option>Equipment</option>
+<option>Cash flow</option>
+<option>Expansion</option>
+<option>Other</option>
+</select>
+</div>
+<div class="form-group full-width"><label>Anything Else?</label><textarea name="notes"></textarea></div>
 <div class="full-width submit-row">
 <p class="agreement">By submitting, you agree to be contacted about your application. No credit check at this stage.</p>
-<button class="btn">Submit Application →</button>
+<button class="btn submit-btn" type="submit">Submit Application →</button>
 </div>
 </form>
+
+<!-- ===== NEW: Success message (hidden until form submits) ===== -->
+<div class="success-message" id="success-message">
+<div class="success-icon">
+<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+</div>
+<h2>Application Submitted Successfully!</h2>
+<p>Thank you for applying. Your application is <strong>currently under review</strong>.</p>
+<p>Our team will email you a personalized offer within <strong>1 business day</strong>.</p>
+<button class="btn-secondary" onclick="window.location.reload()">Submit Another Application</button>
+</div>
+
 </div>
 </section>
 
@@ -219,13 +289,93 @@ PayPal Loan
 </div>
 </footer>
 
+<!-- EmailJS SDK (free, no backend needed) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
 <script>
+/* ============================================================
+   1) FAQ toggle (your existing code, kept intact)
+   ============================================================ */
 document.querySelectorAll('.faq-question').forEach(q=>{
-q.addEventListener('click',()=>{
-const a=q.nextElementSibling;
-a.style.display=a.style.display==='block'?'none':'block';
+  q.addEventListener('click',()=>{
+    const a=q.nextElementSibling;
+    a.style.display=a.style.display==='block'?'none':'block';
+  });
 });
+
+/* ============================================================
+   2) "Check my offer" buttons -> smooth scroll to #apply
+   ============================================================ */
+document.querySelectorAll('.check-offer-btn').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    e.preventDefault();
+    const target = document.getElementById('apply');
+    if(target){
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  });
 });
+
+/* ============================================================
+   3) Form submission -> EmailJS -> success message
+   ============================================================ */
+
+// ⚠️  REPLACE THESE THREE VALUES WITH YOUR OWN (free signup at emailjs.com)
+const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+
+(function(){
+  if (window.emailjs && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+})();
+
+const form = document.getElementById('application-form');
+const successBox = document.getElementById('success-message');
+
+if (form) {
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    // Honeypot: if filled, silently pretend success
+    if (this._honey && this._honey.value) {
+      form.style.display = 'none';
+      successBox.style.display = 'block';
+      successBox.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting…';
+    submitBtn.disabled = true;
+
+    // If EmailJS isn't configured yet, fall back to a friendly demo message
+    if (EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY") {
+      console.warn('EmailJS not configured. Showing demo success message.');
+      setTimeout(()=>{
+        form.style.display = 'none';
+        successBox.style.display = 'block';
+        successBox.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 800);
+      return;
+    }
+
+    emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this)
+      .then(()=>{
+        form.style.display = 'none';
+        successBox.style.display = 'block';
+        successBox.scrollIntoView({behavior:'smooth', block:'center'});
+      })
+      .catch((err)=>{
+        console.error('EmailJS error:', err);
+        alert('Sorry, something went wrong sending your application. Please email us directly or try again.');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      });
+  });
+}
 </script>
 
 </body>
