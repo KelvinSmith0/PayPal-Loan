@@ -348,8 +348,14 @@ form.addEventListener("submit", async function(e){
     submitBtn.innerHTML = "Submit Application →";
 
 });
+document.querySelectorAll('.check-offer-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.getElementById('apply')
+      .scrollIntoView({behavior:'smooth'});
+  });
+});
 </script>
-       
+   
 
 </body>
 </html>
