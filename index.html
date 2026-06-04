@@ -354,6 +354,34 @@ document.querySelectorAll('.check-offer-btn').forEach(btn=>{
       .scrollIntoView({behavior:'smooth'});
   });
 });
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+const faqs = document.querySelectorAll(".faq-question");
+
+faqs.forEach(function(faq){
+
+faq.addEventListener("click", function(){
+
+const answer = this.nextElementSibling;
+const icon = this.querySelector("span");
+
+if(answer.style.display === "block"){
+
+answer.style.display = "none";
+icon.textContent = "+";
+
+}else{
+
+answer.style.display = "block";
+icon.textContent = "−";
+
+}
+
+});
+
+});
+</script>
 </script>
    
 
